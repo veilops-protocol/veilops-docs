@@ -43,7 +43,7 @@ flowchart LR
 
 - ~~Exercise the memo anchor on devnet~~ Done: 6 anchors on 2026-11-20, verified daily by the Devnet anchors workflow.
 - Token-2022 confidential transfer integration for settlement.
-- Design (and only then implement) an on-chain program for record registration or verification. No program exists today.
+- ~~On-chain verification program~~ Done on devnet: `veilops-verifier` (`4fWHkQi8HgWPvw5fS4vudFGn6u6eZvdRKwfQqBgVexTZ`) verifies `veilops-range-v2` proofs on-chain (2026-11-20). Next: audit, then decide on immutability before any mainnet use.
 - Wallet-adapter examples for signing and sending anchor transactions.
 
 ## Phase 04: Applications (planned)

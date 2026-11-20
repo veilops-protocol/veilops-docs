@@ -66,6 +66,24 @@ Everything in this table is visible to anyone who sees a `PublicRecord`.
 - **Denial of service.** Verification cost is linear in `rangeBits` (about 0.3 s per 32-bit record on a developer laptop in local runs); a service verifying untrusted records should rate-limit.
 - **Dependency and supply-chain risk.** `npm audit` runs in CI, but there is no reproducible build or release signing yet.
 
+## Closing the gaps: planned designs (not built)
+
+The sender, timing and asset gaps above are the most common criticism of the current design, and the criticism is correct. Each gap has a candidate design. None is implemented, and none is claimed until it ships with its own proofs, test vectors and review.
+
+| Gap | Candidate design | Main cost or trade-off |
+| --- | --- | --- |
+| **Asset** is public | Blinded asset tags: commit to the asset generator `H_a + r·G` and add an asset-surjection proof that it is one of an allowed set (the Confidential Assets construction). | A larger proof; the policy must list the allowed assets. |
+| **Sender** is linkable | Per-record one-time keys, plus a proof of membership in a set of authorized operators (group or ring signature), plus relayed fee payment so the Solana fee payer does not link records. | Weaker accountability; relayers need incentives. |
+| **Timing** is visible | Publication in fixed epochs with timestamps rounded to the epoch, plus optional cover records to hide volume. | Latency; cover records cost fees. |
+| **Settlement** is public | Token-2022 confidential transfers, where the asset supports them. | Depends on token and wallet support. |
+
+## On-chain verifier: trust properties
+
+- The `veilops-verifier` program (devnet) rebuilds the transcript context from the public inputs itself. A proof therefore cannot be replayed for another operation, limit, asset or commitment.
+- Every scalar must be canonical and every point must decode. Any failed bit proof or sum check aborts the transaction, so a `Record` exists only for a fully verified proof.
+- The program is **upgradable** by the maintainer key while on devnet. Whoever holds that key could deploy different code. `scripts/program-hash.ts` shows the current binary hash and authority, and the hash is compared with the reproducible build. Before any mainnet use: an audit, then a decision on immutability.
+- The operator's Solana address is the fee payer and the `Record` authority, so on-chain it links all of that operator's records (see "Sender" above).
+
 ## Threat scenarios
 
 | Threat | Outcome |

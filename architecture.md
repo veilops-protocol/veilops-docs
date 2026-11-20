@@ -106,7 +106,7 @@ See [security.md](security.md) for the full threat model.
 | --- | --- |
 | SPL Memo anchor instruction (`veilops:<version>:<proofId>:<sha256(record)>`) | Experimental: built and parsed; never sent by the package itself. Exercised on devnet through `scripts/devnet-anchor.ts` (6 anchors; `CLUSTER_STATUS.devnet` is `tested`). Not used on testnet or mainnet. |
 | Token-2022 confidential transfer integration | Planned |
-| On-chain program (registry / verification) | Planned; no program exists in this repository |
+| On-chain verifier (`onchain/programs/veilops-verifier`) | Experimental, devnet only: verifies `veilops-range-v2` range proofs on-chain with the curve25519/SHA-256 syscalls and creates a `Record` only for verified proofs. Program `4fWHkQi8HgWPvw5fS4vudFGn6u6eZvdRKwfQqBgVexTZ`; deployed binary matches the reproducible CI build. Not audited. |
 
 ## Website
 

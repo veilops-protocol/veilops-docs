@@ -13,9 +13,11 @@ This document is the package we will hand to an independent cryptography reviewe
 | Policy proof `veilops-range-v1` (lower and upper bound), transcript binding, record verification, Ed25519 attestation | `packages/proof-engine/src/index.ts` | 165 |
 | Envelope encryption: AES-256-GCM, X25519 + HKDF key wrapping, selective disclosure | `packages/encryption/src/index.ts` | 125 |
 | Canonical JSON and content identifiers (anything hashed or signed) | `packages/shared/src/index.ts` | 100 |
+| `veilops-range-v2`: SHA-256 transcript, binary encoding, public-input rules | `packages/proof-engine/src/v2.ts` | 220 |
+| On-chain verifier (Solana program): account model, buffer handling, CDS checks with syscalls, sum checks, the `Record` invariant | `onchain/programs/veilops-verifier/src/lib.rs` | 420 |
 | Specification | `docs/cryptography.md`, `docs/protocol.md`, `test-vectors/veilops-range-v1.json` | — |
 
-That is about 570 lines of TypeScript. The project depends on `@noble/curves` and `@noble/hashes`, both pinned to exact versions. Those libraries were audited separately; their audits are not ours.
+That is about 790 lines of TypeScript and 420 lines of Rust. The project depends on `@noble/curves` and `@noble/hashes`, both pinned to exact versions. Those libraries were audited separately; their audits are not ours.
 
 ## Questions for the reviewer
 
@@ -26,12 +28,13 @@ That is about 570 lines of TypeScript. The project depends on `@noble/curves` an
 5. **Canonical encodings.** Does every scalar and point decoding reject non-canonical inputs? Is there any malleability that changes `proofId` without invalidating the proof?
 6. **Envelope encryption.** Nonce uniqueness, key wrapping, AAD binding to the operation id, HKDF parameters.
 7. **Attestation.** Is the domain-separated signing payload unambiguous? Is canonical JSON a safe encoding for signing?
-8. **Side channels.** Are secret-dependent operations constant-time where it matters (the prover side)?
+8. **On-chain verifier.** Can any account substitution, partial write, re-entrant call sequence or upgrade path produce a `Record` without a fully verified proof? Is the context the program rebuilds byte-identical to the TypeScript transcript? Is the 512-bit SHA-256 challenge reduction sound?
+9. **Side channels.** Are secret-dependent operations constant-time where it matters (the prover side)?
 
 ## Out of scope
 
 - The website UI and its animations.
-- The Solana devnet anchoring scripts. They only publish a hash; they hold no funds.
+- The Solana devnet anchoring scripts. They only publish a hash; they hold no funds. The on-chain **verifier program** is in scope, see above.
 - Anonymity and unlinkability. VEILOPS makes no such claims; see [security.md](security.md#what-is-not-protected).
 - Token-2022 confidential transfers. This is planned, not implemented.
 
