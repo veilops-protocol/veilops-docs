@@ -104,7 +104,7 @@ See [security.md](security.md) for the full threat model.
 
 | Component | Status |
 | --- | --- |
-| SPL Memo anchor instruction (`veilops:<version>:<proofId>:<sha256(record)>`) | Experimental: built and parsed; never sent by the package; not exercised on devnet, testnet or mainnet (`CLUSTER_STATUS` marks all three `untested`) |
+| SPL Memo anchor instruction (`veilops:<version>:<proofId>:<sha256(record)>`) | Experimental: built and parsed; never sent by the package itself. Exercised on devnet through `scripts/devnet-anchor.ts` (6 anchors; `CLUSTER_STATUS.devnet` is `tested`). Not used on testnet or mainnet. |
 | Token-2022 confidential transfer integration | Planned |
 | On-chain program (registry / verification) | Planned; no program exists in this repository |
 

@@ -109,7 +109,7 @@ const ix = buildAnchorInstruction(record, signerBase58);   // { programId, keys,
 // Convert to your Solana client's instruction type, then sign and send with the caller's wallet.
 ```
 
-This has not been tested on any cluster. Do not assume it works on devnet or mainnet until Phase 03.
+It has been exercised on devnet: six anchors were published with `scripts/devnet-anchor.ts` and are re-checked daily by `scripts/devnet-verify.ts`. It has not been used on mainnet.
 
 ## Writing tests
 

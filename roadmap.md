@@ -23,7 +23,7 @@ flowchart LR
 | `@veilops/proof-engine`: `veilops-range-v1` Pedersen + bit-decomposition range proofs | Done (experimental, not audited) |
 | Ed25519 attestation of public records | Done |
 | `@veilops/sdk`: five-stage `process()` lifecycle | Done |
-| `@veilops/solana-adapter`: SPL Memo anchor builder/parser | Done as experimental code; untested on any cluster |
+| `@veilops/solana-adapter`: SPL Memo anchor builder/parser | Done as experimental code; devnet-tested (6 anchors, 2026-11-20); not on mainnet |
 | Test suite (74 tests: unit, integration, security, reference vectors) | Done |
 | Reference test vectors + independent Python verifier | Done |
 | Reproducible package builds + signed build provenance | Done |
@@ -41,7 +41,7 @@ flowchart LR
 
 ## Phase 03: Solana Integration (planned)
 
-- Exercise the memo anchor on devnet; document results before claiming support.
+- ~~Exercise the memo anchor on devnet~~ Done: 6 anchors on 2026-11-20, verified daily by the Devnet anchors workflow.
 - Token-2022 confidential transfer integration for settlement.
 - Design (and only then implement) an on-chain program for record registration or verification. No program exists today.
 - Wallet-adapter examples for signing and sending anchor transactions.
