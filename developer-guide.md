@@ -8,7 +8,7 @@
 ## Setup
 
 ```bash
-git clone https://github.com/veilops-protocol/veilops.git   # org not created yet
+git clone https://github.com/veilops-protocol/veilops.git
 cd veilops
 npm ci
 ```
@@ -17,7 +17,7 @@ npm ci
 
 | Command | What it does |
 | --- | --- |
-| `npm test` | `vitest run` over `tests/**/*.test.ts` (31 tests: unit, integration, security) |
+| `npm test` | `vitest run` over `tests/**/*.test.ts` (74 tests: unit, integration, security, reference vectors) |
 | `npm run test:watch` | vitest in watch mode |
 | `npm run typecheck` | `tsc` over packages, tests, scripts and examples, then the website's typecheck |
 | `npm run lint` | ESLint 9 flat config with `typescript-eslint` recommended over `packages tests examples scripts` |

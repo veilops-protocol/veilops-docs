@@ -24,15 +24,16 @@ flowchart LR
 | Ed25519 attestation of public records | Done |
 | `@veilops/sdk`: five-stage `process()` lifecycle | Done |
 | `@veilops/solana-adapter`: SPL Memo anchor builder/parser | Done as experimental code; untested on any cluster |
-| Test suite (31 tests: unit, integration, security) | Done |
-| Documentation, CI, community files | In progress |
+| Test suite (74 tests: unit, integration, security, reference vectors) | Done |
+| Reference test vectors + independent Python verifier | Done |
+| Reproducible package builds + signed build provenance | Done |
+| Documentation, CI, community files | Done |
 | Website (veilops.tech) with sample explorer | In progress |
-| Public GitHub organization `veilops-protocol` and repositories | Not yet created |
+| Public GitHub organization `veilops-protocol` and repositories | Done (2026-11-20) |
 
 ## Phase 02: Proof Infrastructure (planned)
 
 - Versioned, compact binary proof encoding (derive `c_1`, drop hex/JSON/base64 layering).
-- Published test vectors for commitments, transcripts and proofs.
 - Batch verification of bit proofs (multi-scalar multiplication).
 - Evaluate a logarithmic-size range proof (for example Bulletproofs) as `veilops-range-v2`.
 - Written security argument for the composed `veilops-range-v1` statement.
